@@ -1,11 +1,11 @@
 resource "random_string" "random_instance_id" {
-  length  = 6
+  length  = 4
   special = false
 }
 
 locals {
   instance_id   = lower(random_string.random_instance_id.result)
-  instance_name = "${var.organization_name}-${var.environment}-${var.support_department_code}-access-logs.${local.instance_id}.${lookup(local.region_abbrs, var.region, null)}"
+  instance_name = lower("${var.organization_name}-${var.environment}-access-logs.${local.instance_id}.${lookup(local.region_abbrs, var.region, null)}")
   resource_tags = merge({
     instance_name    = local.instance_name
     service          = "access-logging",
